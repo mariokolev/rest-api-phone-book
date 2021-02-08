@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PhoneTypeService {
@@ -19,6 +20,13 @@ public class PhoneTypeService {
     }
 
     public void addPhoneType(PhoneType phoneType){
+        Optional<PhoneType> phoneTypeOptional = phoneTypeRepository
+                .findPhoneTypeByType(phoneType.getPhoneType());
+
+        if(phoneTypeOptional.isPresent()){
+            throw new IllegalStateException("phone type already exists!!");
+        }
+
         phoneTypeRepository.save(phoneType);
     }
 
