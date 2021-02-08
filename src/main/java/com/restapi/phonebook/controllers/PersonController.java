@@ -1,5 +1,6 @@
 package com.restapi.phonebook.controllers;
 
+import com.restapi.phonebook.entities.City;
 import com.restapi.phonebook.entities.Person;
 import com.restapi.phonebook.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,15 @@ public class PersonController {
             throw new ResponseStatusException(
                     HttpStatus.NOT_ACCEPTABLE, "Person already exists!!", e);
         }
+    }
+
+    @PutMapping(path = "{personId}")
+    public void updatePerson(@PathVariable("personId") Long personId,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) String middleName,
+                             @RequestParam(required = false) String lastName,
+                             @RequestParam(required = false) String egn,
+                             @RequestParam(required = false) City city){
+        personService.updatePerson(personId, name, middleName, lastName, egn, city);
     }
 }
