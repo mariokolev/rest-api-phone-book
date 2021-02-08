@@ -51,6 +51,12 @@ public class CityController {
     public void updateCity(@PathVariable("cityId") Long cityId,
                            @RequestParam(required = false) String name,
                            @RequestParam(required = false) String region){
-        cityService.updateCity(cityId, name, region);
+
+        try {
+            cityService.updateCity(cityId, name, region);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, "City with id: " + cityId + " doesn't exist!", e);
+        }
     }
 }
