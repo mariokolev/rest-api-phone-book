@@ -1,7 +1,7 @@
-package com.example.PhoneBook.services;
+package com.restapi.phonebook.services;
 
-import com.example.PhoneBook.entities.PhoneType;
-import com.example.PhoneBook.repositories.IPhoneTypeRepository;
+import com.restapi.phonebook.entities.PhoneType;
+import com.restapi.phonebook.repositories.IPhoneTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
