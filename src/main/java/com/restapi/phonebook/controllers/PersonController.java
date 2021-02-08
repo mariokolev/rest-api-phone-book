@@ -27,8 +27,14 @@ public class PersonController {
     }
 
     @GetMapping(path = "{personId}")
-    public Person getPerson(@PathVariable("personId") Long personId){
-        return personService.getPersonById(personId);
+    public Person getPersonById(@PathVariable("personId") Long personId){
+
+        try{
+            return personService.getPersonById(personId);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, "Person with id: " + personId + " doesn't exist!", e);
+        }
     }
 
     @PostMapping
@@ -48,6 +54,11 @@ public class PersonController {
                              @RequestParam(required = false) String lastName,
                              @RequestParam(required = false) String egn,
                              @RequestParam(required = false) City city){
-        personService.updatePerson(personId, name, middleName, lastName, egn, city);
+        try{
+            personService.updatePerson(personId, name, middleName, lastName, egn, city);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, "Person with id: " + personId + " doesn't exist!", e);
+        }
     }
 }
