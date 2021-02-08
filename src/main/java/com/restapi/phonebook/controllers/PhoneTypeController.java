@@ -32,4 +32,11 @@ public class PhoneTypeController {
     public void addPhoneType(@RequestBody PhoneType phoneType){
         phoneTypeService.addPhoneType(phoneType);
     }
+
+    @PutMapping(path = "{phoneTypeId}")
+    public void updatePhoneType(
+            @RequestParam(required = false) Long phoneTypeId,
+            @RequestParam(required = false) String type){
+        phoneTypeService.updatePhoneType(phoneTypeId, type);
+    }
 }
