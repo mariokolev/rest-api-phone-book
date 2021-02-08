@@ -3,10 +3,9 @@ package com.restapi.phonebook.controllers;
 import com.restapi.phonebook.entities.Person;
 import com.restapi.phonebook.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,5 +28,15 @@ public class PersonController {
     @GetMapping(path = "{personId}")
     public Person getPerson(@PathVariable("personId") Long personId){
         return personService.getPersonById(personId);
+    }
+
+    @PostMapping
+    public void addPerson(@RequestBody Person person){
+        try{
+            personService.addPerson(person);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, "Person already exists!!", e);
+        }
     }
 }
