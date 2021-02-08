@@ -28,6 +28,7 @@ public class PhoneTypeController {
         return phoneTypeService.getPhoneTypeById(phoneTypeId);
     }
 
+    @PostMapping
     public void addPhoneType(@RequestBody PhoneType phoneType){
         phoneTypeService.addPhoneType(phoneType);
     }
