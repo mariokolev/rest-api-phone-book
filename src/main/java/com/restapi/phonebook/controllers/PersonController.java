@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @RestController
@@ -43,6 +45,9 @@ public class PersonController {
         }catch(IllegalStateException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_ACCEPTABLE, "Person already exists!!", e);
+        }catch(InvalidParameterException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, "Invalid email!!", e);
         }
     }
 

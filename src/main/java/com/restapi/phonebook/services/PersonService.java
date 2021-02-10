@@ -6,9 +6,12 @@ import com.restapi.phonebook.repositories.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class PersonService {
@@ -32,6 +35,11 @@ public class PersonService {
     }
 
     public void addPerson(Person person){
+
+        if(!validateEmail(person.getEmail())){
+            throw new InvalidParameterException("invalid email!!");
+        }
+
         Optional<Person> personOptional = personRepository
                 .findPersonByEmail(person.getEmail());
 
@@ -86,5 +94,13 @@ public class PersonService {
         ));
 
         personRepository.delete(person);
+    }
+
+    private boolean validateEmail(String email){
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 }
