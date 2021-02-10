@@ -33,7 +33,7 @@ public class PersonService {
 
     public void addPerson(Person person){
         Optional<Person> personOptional = personRepository
-                .findPersonByEGN(person.getEgn());
+                .findPersonByEmail(person.getEmail());
 
         if(personOptional.isPresent()){
             throw new IllegalStateException("person already exists!!");
@@ -43,7 +43,7 @@ public class PersonService {
     }
 
     @Transactional
-    public void updatePerson(Long personId, String name, String middleName, String lastName, String egn, City city) {
+    public void updatePerson(Long personId, String name, String middleName, String lastName, String email, City city) {
 
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new IllegalStateException(
@@ -68,10 +68,10 @@ public class PersonService {
             person.setLastName(lastName);
         }
 
-        if(egn != null &&
-                egn.length() > 0 &&
-                !Objects.equals(person.getEgn(), name)){
-            person.setEgn(egn);
+        if(email != null &&
+                email.length() > 0 &&
+                !Objects.equals(person.getEmail(), name)){
+            person.setEmail(email);
         }
 
         if(city != null &&

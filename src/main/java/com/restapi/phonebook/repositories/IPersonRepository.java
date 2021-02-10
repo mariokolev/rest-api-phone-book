@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface IPersonRepository extends JpaRepository<Person, Long> {
 
-    @Query("SELECT p FROM Person p WHERE p.egn = ?1")
-    Optional<Person> findPersonByEGN(String egn);
+    @Query("SELECT p FROM Person p WHERE p.email = ?1")
+    Optional<Person> findPersonByEmail(String email);
 }

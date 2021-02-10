@@ -20,8 +20,8 @@ public class Person {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "egn", unique = true)
-    private String egn;
+    @Column(name = "email", unique = true)
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -33,18 +33,18 @@ public class Person {
 
     public Person() {}
 
-    public Person(String name, String middleName, String lastName, String egn) {
+    public Person(String name, String middleName, String lastName, String email) {
         this.name = name;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.egn = egn;
+        this.email = email;
     }
 
-    public Person(String name, String middleName, String lastName, String egn, City city, List<PhoneNumber> phoneNumbers) {
+    public Person(String name, String middleName, String lastName, String email, City city, List<PhoneNumber> phoneNumbers) {
         this.name = name;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.egn = egn;
+        this.email = email;
         this.city = city;
         this.phoneNumbers = phoneNumbers;
     }
@@ -81,12 +81,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getEgn() {
-        return egn;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEgn(String egn) {
-        this.egn = egn;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public City getCity() {

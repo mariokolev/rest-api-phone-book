@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 
 @RestController
@@ -52,10 +51,10 @@ public class PersonController {
                              @RequestParam(required = false) String name,
                              @RequestParam(required = false) String middleName,
                              @RequestParam(required = false) String lastName,
-                             @RequestParam(required = false) String egn,
+                             @RequestParam(required = false) String email,
                              @RequestParam(required = false) City city){
         try{
-            personService.updatePerson(personId, name, middleName, lastName, egn, city);
+            personService.updatePerson(personId, name, middleName, lastName, email, city);
         }catch(IllegalStateException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_ACCEPTABLE, "Person with id: " + personId + " doesn't exist!", e);
