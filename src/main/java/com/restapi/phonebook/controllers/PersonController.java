@@ -65,4 +65,11 @@ public class PersonController {
                     HttpStatus.NOT_ACCEPTABLE, "Person with id: " + personId + " doesn't exist!", e);
         }
     }
+
+    @GetMapping(path = "/city/{cityName}/{cityRegion}")
+    public List<Person> getPersonsFromCity(@PathVariable("cityName") String cityName,
+                                           @PathVariable("cityRegion") String cityRegion){
+
+            return personService.getPersonsFromCity(cityName, cityRegion);
+    }
 }

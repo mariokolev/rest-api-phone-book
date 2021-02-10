@@ -103,4 +103,8 @@ public class PersonService {
 
         return matcher.matches();
     }
+
+    public List<Person> getPersonsFromCity(String cityName, String cityRegion) {
+        return personRepository.findAllFromCity(cityName, cityRegion);
+    }
 }
