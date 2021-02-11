@@ -72,4 +72,14 @@ public class PersonController {
 
             return personService.getPersonsFromCity(cityName, cityRegion);
     }
+
+    @GetMapping(path = "email/{email}")
+    public Person getPersonByEmail(@PathVariable("email") String email){
+        try {
+            return personService.getPersonByEmail(email);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Person with email: " + email + " doesn't exist!", e);
+        }
+    }
 }

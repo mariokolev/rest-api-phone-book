@@ -107,4 +107,15 @@ public class PersonService {
     public List<Person> getPersonsFromCity(String cityName, String cityRegion) {
         return personRepository.findAllFromCity(cityName, cityRegion);
     }
+
+    public Person getPersonByEmail(String email) {
+        Optional<Person> personOptional = personRepository
+                .findPersonByEmail(email);
+
+        if(personOptional.isEmpty()){
+            throw new IllegalStateException("person with email: " + email + " doesn't exists!!");
+        }
+
+        return personOptional.get();
+    }
 }
