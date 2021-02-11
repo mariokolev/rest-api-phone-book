@@ -1,9 +1,13 @@
 package com.restapi.phonebook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity(name = "PhoneNumber")
 @Table(name = "phone_numbers")
+@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@uid")
 public class PhoneNumber {
 
     @Id
@@ -16,6 +20,10 @@ public class PhoneNumber {
 
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     public PhoneNumber() {}
 
@@ -46,5 +54,13 @@ public class PhoneNumber {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

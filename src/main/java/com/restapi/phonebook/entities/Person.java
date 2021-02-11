@@ -1,10 +1,14 @@
 package com.restapi.phonebook.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "Person")
 @Table(name = "persons")
+@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@uid")
 public class Person {
 
     @Id
@@ -27,8 +31,9 @@ public class Person {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name = "person_id")
+    @OneToMany(cascade = CascadeType.REMOVE,
+            orphanRemoval = true,
+            mappedBy = "person")
     private List<PhoneNumber> phoneNumbers;
 
     public Person() {}
