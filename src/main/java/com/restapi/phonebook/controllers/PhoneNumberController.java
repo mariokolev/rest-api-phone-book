@@ -3,7 +3,9 @@ package com.restapi.phonebook.controllers;
 import com.restapi.phonebook.entities.PhoneNumber;
 import com.restapi.phonebook.services.PhoneNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -43,4 +45,13 @@ public class PhoneNumberController {
         return phoneNumberService.getPhoneNumbersByPhoneTypeId(phoneTypeId);
     }
 
+    @DeleteMapping(path = "{phoneNumberId}")
+    public void deletePhoneNumber(@PathVariable("phoneNumberId") Long phoneNumberId){
+        try{
+            phoneNumberService.deletePhoneNumber(phoneNumberId);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, e.getMessage(), e);
+        }
+    }
 }

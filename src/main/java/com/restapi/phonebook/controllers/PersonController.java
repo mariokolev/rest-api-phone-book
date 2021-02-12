@@ -82,4 +82,14 @@ public class PersonController {
                     HttpStatus.NOT_FOUND, "Person with email: " + email + " doesn't exist!", e);
         }
     }
+
+    @DeleteMapping(path="{personId}")
+    public void deletePerson(@PathVariable("personId") Long personId){
+        try{
+            personService.deletePerson(personId);
+        }catch(IllegalStateException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_ACCEPTABLE, e.getMessage(), e);
+        }
+    }
 }

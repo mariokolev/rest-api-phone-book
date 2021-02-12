@@ -44,4 +44,17 @@ public class PhoneNumberService {
     public List<PhoneNumber> getPhoneNumbersByPhoneTypeId(Long phoneTypeId) {
         return phoneNumberRepository.getPhoneNumbersByPhoneTypeId(phoneTypeId);
     }
+
+    public void deletePhoneNumber(Long phoneNumberId) {
+
+        phoneNumberRepository.findById(phoneNumberId)
+                .ifPresentOrElse((phoneNumber) -> {
+                            phoneNumberRepository.delete(phoneNumber);
+                        },() -> {
+                            throw new IllegalStateException(
+                                    "phone number with id: " + phoneNumberId + " doesn't exist!!"
+                            );
+                        }
+                );
+    }
 }
