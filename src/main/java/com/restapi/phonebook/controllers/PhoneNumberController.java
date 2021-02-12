@@ -5,6 +5,8 @@ import com.restapi.phonebook.services.PhoneNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/phonenumbers")
 public class PhoneNumberController {
@@ -25,4 +27,20 @@ public class PhoneNumberController {
     public void addPhoneNumber(@RequestBody PhoneNumber phoneNumber){
         phoneNumberService.addPhoneNumber(phoneNumber);
     }
+
+    @GetMapping(path = {"person/id"})
+    public List<PhoneNumber> getPhoneNumbersByPersonId(@RequestParam("personId") Long personId){
+        return phoneNumberService.getPhoneNumbersByPersonId(personId);
+    }
+
+    @GetMapping(path = {"city/id"})
+    public List<PhoneNumber> getPhoneNumbersFromCityById(@RequestParam("cityId") Long cityId){
+        return phoneNumberService.getPhoneNumbersFromCityById(cityId);
+    }
+
+    @GetMapping(path = {"phonetype/id"})
+    public List<PhoneNumber> getPhoneNumbersByPhoneTypeId(@RequestParam("phoneTypeId") Long phoneTypeId){
+        return phoneNumberService.getPhoneNumbersByPhoneTypeId(phoneTypeId);
+    }
+
 }

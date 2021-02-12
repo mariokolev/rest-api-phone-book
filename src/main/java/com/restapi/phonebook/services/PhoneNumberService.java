@@ -5,6 +5,7 @@ import com.restapi.phonebook.repositories.IPhoneNumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,17 @@ public class PhoneNumberService {
         }
 
         phoneNumberRepository.save(phoneNumber);
+    }
+
+    public List<PhoneNumber> getPhoneNumbersByPersonId(Long personId) {
+        return phoneNumberRepository.getPhoneNumbersByPersonId(personId);
+    }
+
+    public List<PhoneNumber> getPhoneNumbersFromCityById(Long cityId) {
+        return phoneNumberRepository.getPhoneNumbersFromCityById(cityId);
+    }
+
+    public List<PhoneNumber> getPhoneNumbersByPhoneTypeId(Long phoneTypeId) {
+        return phoneNumberRepository.getPhoneNumbersByPhoneTypeId(phoneTypeId);
     }
 }
