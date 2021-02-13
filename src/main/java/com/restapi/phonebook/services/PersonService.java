@@ -66,19 +66,19 @@ public class PersonService {
 
         if(middleName != null &&
                 middleName.length() > 0 &&
-                !Objects.equals(person.getMiddleName(), name)){
+                !Objects.equals(person.getMiddleName(), middleName)){
             person.setMiddleName(middleName);
         }
 
         if(lastName != null &&
                 lastName.length() > 0 &&
-                !Objects.equals(person.getLastName(), name)){
+                !Objects.equals(person.getLastName(), lastName)){
             person.setLastName(lastName);
         }
 
         if(email != null &&
                 email.length() > 0 &&
-                !Objects.equals(person.getEmail(), name)){
+                !Objects.equals(person.getEmail(), email)){
             person.setEmail(email);
         }
 
